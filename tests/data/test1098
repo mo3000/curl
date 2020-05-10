@@ -29,6 +29,7 @@ http
 <features>
 http
 ftp
+proxy
 </features>
  <name>
 FTP RETR twice over proxy confirming persistent connection
@@ -57,7 +58,7 @@ Accept: */*
 Proxy-Connection: Keep-Alive
 
 </protocol>
-<stdout mode="text">
+<stdout>
 HTTP/1.1 200 OK
 Date: Thu, 09 Nov 2010 14:49:00 GMT
 Content-Length: 6

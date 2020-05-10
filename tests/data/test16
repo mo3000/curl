@@ -31,8 +31,11 @@ http
 HTTP with proxy authorization
  </name>
  <command>
- -U fake@user:§§§looooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooong -x %HOSTIP:%HTTPPORT http://we.want.that.site.com/16
+ -U fake@user:loooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooong -x %HOSTIP:%HTTPPORT http://we.want.that.site.com/16
 </command>
+<features>
+proxy
+</features>
 </client>
 
 # Verify data after the test has been "shot"
@@ -42,8 +45,8 @@ HTTP with proxy authorization
 </strip>
 <protocol>
 GET http://we.want.that.site.com/16 HTTP/1.1
-Proxy-Authorization: Basic ZmFrZUB1c2VyOqenp2xvb29vb29vb29vb29vb29vb29vb29vb29vb29vb29vb29vb29vb29vb29vb29vb29vb29vb29vb29vb29vb29vb29vb29vb29vb29vb29vb29vb29vb29vb29vb29vb29vb29vb29vb29vb29vb29vb29vb29vb29vb29vb29vb29vb29vb29vb29vb29vb29vb29vb29vb29vb29vb29vb29vb29uZw==
 Host: we.want.that.site.com
+Proxy-Authorization: Basic ZmFrZUB1c2VyOmxvb29vb29vb29vb29vb29vb29vb29vb29vb29vb29vb29vb29vb29vb29vb29vb29vb29vb29vb29vb29vb29vb29vb29vb29vb29vb29vb29vb29vb29vb29vb29vb29vb29vb29vb29vb29vb29vb29vb29vb29vb29vb29vb29vb29vb29vb29vb29vb29vb29vb29vb29vb29vb29vb29vb29vb29uZw==
 Accept: */*
 Proxy-Connection: Keep-Alive
 

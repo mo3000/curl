@@ -56,6 +56,9 @@ HTTP CONNECT with proxytunnel getting two URLs from the same host
  <command>
 http://remotesite.com.275:%HTTPPORT/we/want/that/page/275 -p -x %HOSTIP:%PROXYPORT --user iam:myself --proxy-user youare:yourself http://remotesite.com.275:%HTTPPORT/we/want/that/page/275
 </command>
+<features>
+proxy
+</features>
 </client>
 
 #
@@ -74,13 +77,13 @@ Proxy-Connection: Keep-Alive
 </proxy>
 <protocol>
 GET /we/want/that/page/275 HTTP/1.1
-Authorization: Basic aWFtOm15c2VsZg==
 Host: remotesite.com.275:%HTTPPORT
+Authorization: Basic aWFtOm15c2VsZg==
 Accept: */*
 
 GET /we/want/that/page/275 HTTP/1.1
-Authorization: Basic aWFtOm15c2VsZg==
 Host: remotesite.com.275:%HTTPPORT
+Authorization: Basic aWFtOm15c2VsZg==
 Accept: */*
 
 </protocol>

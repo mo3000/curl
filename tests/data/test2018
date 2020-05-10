@@ -35,7 +35,7 @@ file
 Metalink
 </features>
  <name>
-Metalink local XML file, attempt UNIX questionable file name I
+Metalink local XML file, attempt Unix questionable file name I
  </name>
 <command option="no-output,no-include">
 --metalink file://%PWD/log/test2018.metalink
@@ -66,7 +66,7 @@ perl %SRCDIR/libtest/notexists.pl log/2018 log/name2018 log/.download2018
 <verify>
 <file1 name="log/stdout2018">
 </file1>
-<file2 name="log/stderr2018">
+<file2 name="log/stderr2018" mode="text">
 Metalink: parsing (file://%PWD/log/test2018.metalink) metalink/XML...
 Metalink: parsing (file://%PWD/log/test2018.metalink) WARNING (missing or invalid file name)
 Metalink: parsing (file://%PWD/log/test2018.metalink) FAILED

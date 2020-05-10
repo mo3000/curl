@@ -33,6 +33,9 @@ http_proxy=http://fake:user@%HOSTIP:%HTTPPORT/
  <command>
 http://we.want.that.site.com/63
 </command>
+<features>
+proxy
+</features>
 </client>
 
 # Verify data after the test has been "shot"
@@ -42,8 +45,8 @@ http://we.want.that.site.com/63
 </strip>
 <protocol>
 GET http://we.want.that.site.com/63 HTTP/1.1
-Proxy-Authorization: Basic ZmFrZTp1c2Vy
 Host: we.want.that.site.com
+Proxy-Authorization: Basic ZmFrZTp1c2Vy
 Accept: */*
 Proxy-Connection: Keep-Alive
 

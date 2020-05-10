@@ -26,6 +26,7 @@ This is not the real page either!
 # Client-side
 <client>
 <features>
+proxy
 </features>
 <server>
 http
@@ -45,9 +46,9 @@ http://%HOSTIP:%HTTPPORT/82 --proxy-user testuser:testpass -x http://%HOSTIP:%HT
 </strip>
 <protocol>
 GET http://%HOSTIP:%HTTPPORT/82 HTTP/1.1
+Host: %HOSTIP:%HTTPPORT
 Proxy-Authorization: Basic dGVzdHVzZXI6dGVzdHBhc3M=
 User-Agent: curl/7.10.6-pre1 (i686-pc-linux-gnu) libcurl/7.10.6-pre1 OpenSSL/0.9.7a ipv6 zlib/1.1.3
-Host: %HOSTIP:%HTTPPORT
 Accept: */*
 Proxy-Connection: Keep-Alive
 

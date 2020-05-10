@@ -32,6 +32,7 @@ http
 </server>
 <features>
 ftp
+proxy
 </features>
 <tool>
 lib549
@@ -58,7 +59,7 @@ Accept: */*
 Proxy-Connection: Keep-Alive
 
 </protocol>
-<stdout mode="text">
+<stdout>
 hello
 </stdout>
 </verify>

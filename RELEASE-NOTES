@@ -1,118 +1,85 @@
-Curl and libcurl 7.30.0
+curl and libcurl 7.71.0
 
- Public curl releases:         132
- Command line options:         152
- curl_easy_setopt() options:   199
- Public functions in libcurl:  58
- Known libcurl bindings:       42
- Contributors:                 1005
-
-***
-  krb4 support is up for removal. If you care about it at all, speak up
-  on the curl-library list asap!
-***
+ Public curl releases:         192
+ Command line options:         231
+ curl_easy_setopt() options:   270
+ Public functions in libcurl:  82
+ Contributors:                 2172
 
 This release includes the following changes:
 
- o imap: Changed response tag generation to be completely unique
- o imap: Added support for SASL-IR extension
- o imap: Added support for the list command
- o imap: Added support for the append command
- o imap: Added custom request parsing
- o imap: Added support to the fetch command for UID and SECTION properties
- o imap: Added parsing and verification of the UIDVALIDITY mailbox attribute
- o darwinssl: Make certificate errors less techy
- o imap/pop3/smtp: Added support for the STARTTLS capability
- o checksrc: ban use of sprintf, vsprintf, strcat, strncat and gets
- o curl_global_init() now accepts the CURL_GLOBAL_ACK_EINTR flag [10]
- o Added CURLMOPT_MAX_HOST_CONNECTIONS, CURLMOPT_MAX_TOTAL_CONNECTIONS for
-   new multi interface connection handling.
- o Added CURLMOPT_MAX_PIPELINE_LENGTH, CURLMOPT_CONTENT_LENGTH_PENALTY_SIZE,
-   CURLMOPT_CHUNK_LENGTH_PENALTY_SIZE, CURLMOPT_PIPELINING_SITE_BL and
-   CURLMOPT_PIPELINING_SERVER_BL for new pipelining control [15]
+ o CURLOPT_SSL_OPTIONS: optional use of Windows' CA store (with openssl) [10]
 
 This release includes the following bugfixes:
 
- o darwinssl: Fix build under Leopard
- o DONE: consider callback-aborted transfers premature [1]
- o ntlm: fix memory leak
- o smtp: Fixed an issue when processing EHLO failure responses
- o pop3: Fixed incorrect return value from pop3_endofresp()
- o pop3: Fixed SASL authentication capability detection
- o pop3: Fixed blocking SSL connect when connecting via POP3S
- o imap: Fixed memory leak when performing multiple selects 
- o nss: fix misplaced code enabling non-blocking socket mode
- o AddFormData: prevent only directories from being posted [2]
- o darwinssl: fix infinite loop if server disconnected abruptly [3]
- o metalink: fix improbable crash parsing metalink filename
- o show proper host name on failed resolve
- o MacOSX-Framework: Make script work in Xcode 4.0 and later
- o strlcat: remove function [4]
- o darwinssl: Fix send glitchiness with data > 32 or so KB [5]
- o polarssl: better 1.1.x and 1.2.x support
- o various documentation improvements
- o multi: NULL pointer reference when closing an unused multi handle [9]
- o SOCKS: fix socks proxy when noproxy matched [7]
- o install-sh: updated to support multiple source files as arguments [6]
- o PolarSSL: added human readable error strings
- o resolver_error: remove wrong error message output
- o docs: updates HTML index and general improvements
- o curlbuild.h.dist: enhance non-configure GCC ABI detection logic
- o sasl: Fixed null pointer reference when decoding empty digest challenge [8]
- o easy: do not ignore poll() failures other than EINTR
- o darwinssl: disable ECC ciphers under Mountain Lion by default
- o CONNECT: count received headers [11]
- o build: fixes for VMS
- o CONNECT: clear 'rewindaftersend' on success [12]
- o HTTP proxy: insert slash in URL if missing [13]
- o hiperfifo: updated to use current libevent API [14]
- o getinmemory.c: abort the transfer nicely if not enough memory
- o improved win32 memorytracking and fixed NTLM memory leaks
- o corrected proxy header response headers count [16]
- o FTP quote operations on re-used connection [17]
- o tcpkeepalive on win32 [18]
- o easy: acknowledge the CURLOPT_MAXCONNECTS option properly [19]
- o easy interface: restore default MAXCONNECTS to 5
- o win32: don't set SO_SNDBUF for windows vista or later versions [20]
+ o *_sspi: fix bad uses of CURLE_NOT_BUILT_IN [21]
+ o appveyor: disable flaky test 1501 and ignore broken 1056
+ o appveyor: disable test 1139 instead of ignoring it
+ o asyn-*: remove support for never-used NULL entry pointers [19]
+ o cirrus: disable SFTP and SCP tests [7]
+ o connect: make happy eyeballs work for QUIC (again) [16]
+ o doc: add missing closing parenthesis in CURLINFO_SSL_VERIFYRESULT.3 [5]
+ o doc: Rename VERSIONS to VERSIONS.md as it already has Markdown syntax [20]
+ o docs/HTTP3: add qlog to the quiche build instruction
+ o dynbuf: introduce internal generic dynamic buffer functions [17]
+ o examples: remove asiohiper.cpp [4]
+ o GnuTLS: Backend support for CURLINFO_SSL_VERIFYRESULT [9]
+ o http2: simplify and clean up trailer handling [6]
+ o libssh2: set the expected total size in SCP upload init [2]
+ o libtest/cmake: Remove commented code [13]
+ o ngtcp2: introduce qlog support [23]
+ o quiche: enable qlog output [14]
+ o runtests: remove sleep calls [18]
+ o runtests: show elapsed test time with higher precision (ms)
+ o select: fix overflow protection in Curl_socket_check [22]
+ o sockfilt: make select_ws stop waiting on exit signal event
+ o test1177: look for curl.h in source directory [1]
+ o test613.pl: make tests 613 and 614 work with OpenSSH for Windows [8]
+ o test75: Remove precheck test
+ o tests: add support for SSH server variant specific transfer paths [24]
+ o tests: make test 1248 + 1249 use %NOLISTENPORT [3]
+ o tests: pick a random port number for SSH [12]
+ o tests: run stunnel for HTTPS and FTPS on dynamic ports [11]
+ o travis: add "qlog" as feature in the quiche build
+ o urlapi: accept :: as a valid IPv6 address [15]
 
 This release includes the following known bugs:
 
- o see docs/KNOWN_BUGS (http://curl.haxx.se/docs/knownbugs.html)
+ o see docs/KNOWN_BUGS (https://curl.haxx.se/docs/knownbugs.html)
 
 This release would not have looked like this without help, code, reports and
 advice from friends like these:
 
- Kamil Dudka, Steve Holme, Nick Zitzmann, Patricia Muscalu, Dan Fandrich,
- Gisle Vanem, Guenter Knauf, Yang Tse, Oliver Gondža, Aki Koskinen,
- Alexander Klauer, Kim Vandry, Willem Sparreboom, Jeremy Huddleston,
- Bruno de Carvalho, Rainer Jung, Jeremy Huddleston, Kim Vandry, Jiri Hruska,
- Alexander Klauer, Saran Neti, Alessandro Ghedini, Linus Nielsen Feltzing,
- Martin Jansen, John E. Malmberg, Tom Grace, Patrick Monnerat,
- Zdenek Pavlas, Myk Taylor, Cédric Deltheil, Robert Wruck, Sam Deane,
- Clemens Gruber, Marc Hoersken, Tomas Mlcoch, Fredrik Thulin, Steven Gu,
- Andrew Kurushin, Christian Hägele
+  Dan Fandrich, Daniel Stenberg, Emil Engler, Gilles Vollant, Kamil Dudka,
+  Kane York, Lucas Pardue, Marc Hörsken, Michael Kaufmann, Murugan Balraj,
+  Pavel Volgarev, Peter Wang, Ray Satiro, Rikard Falkeborn, rl1987 on github,
+  (15 contributors)
 
         Thanks! (and sorry if I forgot to mention someone)
 
 References to bug reports and discussions on issues:
 
- [1] = http://curl.haxx.se/bug/view.cgi?id=1184
- [2] = http://curl.haxx.se/mail/archive-2013-02/0040.html
- [3] = http://curl.haxx.se/mail/lib-2013-03/0014.html
- [4] = http://curl.haxx.se/bug/view.cgi?id=1192
- [5] = http://curl.haxx.se/mail/lib-2013-02/0145.html
- [6] = http://curl.haxx.se/bug/view.cgi?id=1195
- [7] = http://curl.haxx.se/bug/view.cgi?id=1190
- [8] = http://curl.haxx.se/bug/view.cgi?id=1193
- [9] = http://curl.haxx.se/bug/view.cgi?id=1194
- [10] = http://curl.haxx.se/bug/view.cgi?id=1168
- [11] = http://curl.haxx.se/bug/view.cgi?id=1204
- [12] = https://groups.google.com/d/msg/msysgit/B31LNftR4BI/KhRTz0iuGmUJ
- [13] = http://curl.haxx.se/bug/view.cgi?id=1206
- [14] = http://curl.haxx.se/bug/view.cgi?id=1199
- [15] = http://daniel.haxx.se/blog/2013/03/26/better-pipelining-in-libcurl-7-30-0/
- [16] = http://curl.haxx.se/bug/view.cgi?id=1204
- [17] = http://curl.haxx.se/mail/lib-2013-03/0319.html
- [18] = http://curl.haxx.se/bug/view.cgi?id=1209
- [19] = http://curl.haxx.se/bug/view.cgi?id=1212
- [20] = http://curl.haxx.se/bug/view.cgi?id=1188
+ [1] = https://curl.haxx.se/bug/?i=5310
+ [2] = https://curl.haxx.se/mail/archive-2020-05/0000.html
+ [3] = https://curl.haxx.se/bug/?i=5318
+ [4] = https://curl.haxx.se/bug/?i=5090
+ [5] = https://curl.haxx.se/bug/?i=5320
+ [6] = https://bugs.chromium.org/p/oss-fuzz/issues/detail?id=22030
+ [7] = https://curl.haxx.se/bug/?i=5315
+ [8] = https://curl.haxx.se/bug/?i=5328
+ [9] = https://curl.haxx.se/bug/?i=5287
+ [10] = https://curl.haxx.se/bug/?i=4346
+ [11] = https://curl.haxx.se/bug/?i=5267
+ [12] = https://curl.haxx.se/bug/?i=5273
+ [13] = https://curl.haxx.se/bug/?i=5311
+ [14] = https://curl.haxx.se/bug/?i=5341
+ [15] = https://curl.haxx.se/bug/?i=5344
+ [16] = https://curl.haxx.se/bug/?i=5334
+ [17] = https://curl.haxx.se/bug/?i=5300
+ [18] = https://curl.haxx.se/bug/?i=5323
+ [19] = https://curl.haxx.se/bug/?i=5324
+ [20] = https://curl.haxx.se/bug/?i=5325
+ [21] = https://curl.haxx.se/bug/?i=5355
+ [22] = https://curl.haxx.se/bug/?i=5286
+ [23] = https://curl.haxx.se/bug/?i=5353
+ [24] = https://curl.haxx.se/bug/?i=5298

@@ -31,6 +31,9 @@ HTTP with proxy string including http:// and user only
  <command>
 http://we.want.that.site.com/279 -x http://f%61ke@%HOSTIP:%HTTPPORT
 </command>
+<features>
+proxy
+</features>
 </client>
 
 # Verify data after the test has been "shot"
@@ -40,8 +43,8 @@ http://we.want.that.site.com/279 -x http://f%61ke@%HOSTIP:%HTTPPORT
 </strip>
 <protocol>
 GET http://we.want.that.site.com/279 HTTP/1.1
-Proxy-Authorization: Basic ZmFrZTo=
 Host: we.want.that.site.com
+Proxy-Authorization: Basic ZmFrZTo=
 Accept: */*
 Proxy-Connection: Keep-Alive
 

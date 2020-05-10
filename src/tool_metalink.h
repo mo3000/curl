@@ -7,11 +7,11 @@
  *                            | (__| |_| |  _ <| |___
  *                             \___|\___/|_| \_\_____|
  *
- * Copyright (C) 1998 - 2013, Daniel Stenberg, <daniel@haxx.se>, et al.
+ * Copyright (C) 1998 - 2020, Daniel Stenberg, <daniel@haxx.se>, et al.
  *
  * This software is licensed as described in the file COPYING, which
  * you should have received as part of this distribution. The terms
- * are also available at http://curl.haxx.se/docs/copyright.html.
+ * are also available at https://curl.haxx.se/docs/copyright.html.
  *
  * You may opt to use, copy, modify, merge, publish, distribute and/or sell
  * copies of the Software, and permit persons to whom the Software is
@@ -22,33 +22,31 @@
  *
  ***************************************************************************/
 #include "tool_setup.h"
+#include "tool_sdecls.h"
+
+struct GlobalConfig;
+struct OperationConfig;
 
 /* returns 1 for success, 0 otherwise (we use OpenSSL *_Init fncs directly) */
-typedef int (* Curl_digest_init_func)(void *context);
+typedef int (*digest_init_func)(void *context);
 
-typedef void (* Curl_digest_update_func)(void *context,
-                                         const unsigned char *data,
-                                         unsigned int len);
-typedef void (* Curl_digest_final_func)(unsigned char *result, void *context);
+typedef void (*digest_update_func)(void *context,
+                                   const unsigned char *data,
+                                   unsigned int len);
+typedef void (*digest_final_func)(unsigned char *result, void *context);
 
 typedef struct {
-  Curl_digest_init_func     digest_init;   /* Initialize context procedure */
-  Curl_digest_update_func   digest_update; /* Update context with data */
-  Curl_digest_final_func    digest_final;  /* Get final result procedure */
-  unsigned int           digest_ctxtsize;  /* Context structure size */
-  unsigned int           digest_resultlen; /* Result length (bytes) */
+  digest_init_func     digest_init;   /* Initialize context procedure */
+  digest_update_func   digest_update; /* Update context with data */
+  digest_final_func    digest_final;  /* Get final result procedure */
+  unsigned int         digest_ctxtsize;  /* Context structure size */
+  unsigned int         digest_resultlen; /* Result length (bytes) */
 } digest_params;
 
 typedef struct {
   const digest_params   *digest_hash;      /* Hash function definition */
   void                  *digest_hashctx;   /* Hash function context */
 } digest_context;
-
-digest_context * Curl_digest_init(const digest_params *dparams);
-int Curl_digest_update(digest_context *context,
-                       const unsigned char *data,
-                       unsigned int len);
-int Curl_digest_final(digest_context *context, unsigned char *result);
 
 typedef struct {
   const char *hash_name;
@@ -101,7 +99,9 @@ extern const digest_params SHA256_DIGEST_PARAMS[1];
  * Counts the resource in the metalinkfile.
  */
 int count_next_metalink_resource(metalinkfile *mlfile);
-void clean_metalink(struct Configurable *config);
+
+void delete_metalinkfile(metalinkfile *mlfile);
+void clean_metalink(struct OperationConfig *config);
 
 /*
  * Performs final parse operation and extracts information from
@@ -113,7 +113,7 @@ void clean_metalink(struct Configurable *config);
  * -1: Parsing failed; or no file is found
  * -2: Parsing succeeded with some warnings.
  */
-int parse_metalink(struct Configurable *config, struct OutStruct *outs,
+int parse_metalink(struct OperationConfig *config, struct OutStruct *outs,
                    const char *metalink_url);
 
 /*
@@ -142,7 +142,7 @@ int check_metalink_content_type(const char *content_type);
  *   No checksum in Metalink supported, hash algorithm not available, or
  *   Metalink does not contain checksum.
  */
-int metalink_check_hash(struct Configurable *config,
+int metalink_check_hash(struct GlobalConfig *config,
                         metalinkfile *mlfile,
                         const char *filename);
 
@@ -154,7 +154,8 @@ void metalink_cleanup(void);
 #else /* USE_METALINK */
 
 #define count_next_metalink_resource(x)  0
-#define clean_metalink(x)  Curl_nop_stmt
+#define delete_metalinkfile(x)  (void)x
+#define clean_metalink(x)  (void)x
 
 /* metalink_cleanup() takes no arguments */
 #define metalink_cleanup() Curl_nop_stmt

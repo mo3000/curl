@@ -1,5 +1,5 @@
 //
-// cURL network retrieval client
+// curl network retrieval client
 //
 
 TARGET        curl.exe
@@ -45,11 +45,12 @@ SOURCE \
     tool_vms.c \
     tool_writeenv.c \
     tool_writeout.c \
+    tool_writeout_json.c \
     tool_xattr.c
 
 SOURCEPATH  ../../../lib
 SOURCE \
-    rawstr.c nonblock.c
+    strcase.c nonblock.c
 
 USERINCLUDE ../../../src ../../../lib ../../../include/curl
 
@@ -61,4 +62,3 @@ STATICLIBRARY libcrt0.lib
 CAPABILITY NetworkServices
 
 EPOCSTACKSIZE 0x8000
-
